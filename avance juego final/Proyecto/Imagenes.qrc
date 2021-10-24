@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>imagenes/fondo.png</file>
+        <file>imagenes/inicio.png</file>
+        <file>imagenes/Ardilla.png</file>
+        <file>imagenes/nuez.png</file>
+        <file>imagenes/halcon.png</file>
+        <file>imagenes/suelo.png</file>
+        <file>imagenes/puntaje.png</file>
+        <file>imagenes/vidastxt.png</file>
+        <file>imagenes/Tortuga.png</file>
+        <file>imagenes/fondo_escena2.png</file>
+        <file>imagenes/plataforma.png</file>
+        <file>imagenes/next.png</file>
+        <file>imagenes/CoinCount2.ttf</file>
+    </qresource>
+</RCC>
