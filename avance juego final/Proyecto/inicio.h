@@ -39,7 +39,7 @@ private:
     string database;
     View *viewer;
     QGraphicsPixmapItem *foreground;
-    login *loginWindow;
+    Login *loginWindow;
 
     QScrollBar *scroll;
     Mundos *scene;

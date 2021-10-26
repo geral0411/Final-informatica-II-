@@ -28,8 +28,8 @@ Inicio::Inicio(View *view, QWidget *parent) : QGraphicsScene(parent)
 
     //Push Button para jugar individual
     Unjugador = new QPushButton(viewer);
-    Unjugador->setText("Load Game");
-    Unjugador->setObjectName(QString("Load Game"));
+    Unjugador->setText("cargar juego");
+    Unjugador->setObjectName(QString("cargar juego"));
     Unjugador->setToolTip("Login as a guest");
     Unjugador->setGeometry(QRect(440, 400, 100, 32));
     connect(Unjugador, SIGNAL(clicked()), this, SLOT(unjugadorLogin()));
@@ -43,7 +43,7 @@ Inicio::Inicio(View *view, QWidget *parent) : QGraphicsScene(parent)
     connect(multijugador, SIGNAL(clicked()), this, SLOT(multijugadorLogin()));
 
     newUserButton = new QPushButton(viewer);
-    newUserButton->setText("New User");
+    newUserButton->setText("Nuevo usuario");
     newUserButton->setObjectName(QString("newUserButton"));
     newUserButton->setToolTip("Click to create a login");
     newUserButton->setGeometry(QRect(660, 400, 100, 32));
@@ -58,8 +58,8 @@ Inicio::Inicio(View *view, QWidget *parent) : QGraphicsScene(parent)
     QFont font("MV Boli", 15, QFont::Bold);
     userName = new QLabel(viewer);
     userName->setFont(font);
-    userName->setText("Username");
-    userName->setObjectName(QString("username"));
+    userName->setText("Usuario");
+    userName->setObjectName(QString("Usuario"));
     userName->setGeometry(QRect(430, 320, 100, 25));
 
     //Se agrega  line edit para  password, con opción de ocultarlo
@@ -73,7 +73,7 @@ Inicio::Inicio(View *view, QWidget *parent) : QGraphicsScene(parent)
     password = new QLabel(viewer);
     password->setFont(font);
     password->setText("Password");
-    password->setObjectName(QString("password"));
+    password->setObjectName(QString("Password"));
     password->setGeometry(QRect(430, 350, 100, 25));
 
 }

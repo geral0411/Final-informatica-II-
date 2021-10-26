@@ -4,9 +4,11 @@
 #include <QDialog>
 #include <QProcess>
 
+QT_BEGIN_NAMESPACE
 namespace Ui {
 class Triunfo;
 }
+QT_END_NAMESPACE
 
 class Triunfo : public QDialog
 {

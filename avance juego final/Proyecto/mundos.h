@@ -110,8 +110,8 @@ private:
     Halcon *Halcon2;
     Halcon *Halcon3;
     Roca *roca;
-    Next *flag;
-    Next2 *zanahoriaDorada;
+    Next *next;
+    Next2 *next2;
 
     QGraphicsItem *m_platform;
 

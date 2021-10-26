@@ -11,6 +11,17 @@
 #include <QDebug>
 
 // se carga la imagen asociada, a si es un jugador o multijugador
+void Personaje::friccion()
+{
+    float result = 0;
+    result = Xo + n* Vo * cont * T - n*0.5 * Mk *9.8 * cont *cont *T*T;
+    if(result-x() >=1 || result-x() <=-1){
+        moveBy(result-x(),0);
+        cont++;
+    }
+
+}
+
 Personaje::Personaje(bool jugador, QGraphicsItem *parent) : QGraphicsItem(parent),m_StandingDirection(), mState(Standing){
 
     jugador_=jugador;
@@ -29,6 +40,9 @@ Personaje::Personaje(bool jugador, QGraphicsItem *parent) : QGraphicsItem(parent
         standShootPixmap = QPixmap(":/imagenes/Ardilla.png");
         mPixmap = mWalkPixmap;
     }
+    time = new QTimer;
+    connect(time,SIGNAL(timeout()),this,SLOT(friccion()));
+    time->start(T*1000);
 }
 
 Personaje::~Personaje(){
@@ -71,6 +85,21 @@ bool Personaje::isFalling(){
 
     return mState == Falling;
 }
+
+int Personaje::wid()
+{
+    return mPixmap.width(); // retorna el ancho
+}
+
+void Personaje::new_spike(float x, float v, float mg, int p)
+{
+    Xo = x;
+    Vo = v;
+    Mk = mg;
+    n = p;
+    cont = 1;
+}
+
 
 //retorna la direccion de conejo
 int Personaje::direction() const{
@@ -135,6 +164,7 @@ void Personaje::addStandingDirection(int standingDirection){
 //Verifica cuando el personaje está tocando con los pies un objeto
 bool Personaje::isTouchingFoot(QGraphicsItem *item){
 
+    //return collidesWithItem(item);
     QRectF rect(pos().x(), (pos().y() + boundingRect().height()) -5, boundingRect().width(), 5);
     QRectF otherRect(item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height());
 
@@ -144,6 +174,7 @@ bool Personaje::isTouchingFoot(QGraphicsItem *item){
 //Verifica cuando el personaje está tocando con la cabeza un objeto
 bool Personaje::isTouchingHead(QGraphicsItem *item){
 
+    //return collidesWithItem(item);
     QRectF rect(pos().x(), pos().y(), boundingRect().width(), 5);
     QRectF otherRect(item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height());
     return rect.intersects(otherRect);
@@ -151,8 +182,10 @@ bool Personaje::isTouchingHead(QGraphicsItem *item){
 
 //Verifica cuando el personaje está tocando alguna de las plataformas
 bool Personaje::isTouchingPlatform(QGraphicsItem *item){
-
+    //return collidesWithItem(item);
     QRectF rect(pos().x(), (pos().y() + boundingRect().height()) - 5, boundingRect().width(), 10);
     QRectF otherRect(item->pos().x(), item->pos().y(), item->boundingRect().width(), item->boundingRect().height());
     return rect.intersects(otherRect);
 }
+
+

@@ -9,9 +9,11 @@
 #include <QWidget>
 using namespace std;
 
+QT_BEGIN_NAMESPACE
 namespace Ui {
 class Login;
 }
+QT_END_NAMESPACE
 
 class Login : public QDialog
 {

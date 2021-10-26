@@ -50,6 +50,7 @@ void Mundos::keyPressEvent(QKeyEvent *event){
             per->addDirection(1);
             per->addStandingDirection(1);
             checkTimer();
+            per->new_spike(per->x(),150,10,1);
             break;
         }
 
@@ -60,6 +61,7 @@ void Mundos::keyPressEvent(QKeyEvent *event){
             per->addDirection(-1);
             per->addStandingDirection(-1);
             checkTimer();
+            per->new_spike(per->x(),150,10,-1);
             break;
         }
 
@@ -120,6 +122,7 @@ void Mundos::keyReleaseEvent(QKeyEvent *event)
 //se da el movimento al perosnaje según el evento y a su vez se desplaza la escena
 void Mundos::moverPersonaje()
 {
+
     if (mundo){
         checkColisionMuros();
         checkColNueces();
@@ -137,6 +140,7 @@ void Mundos::moverPersonaje()
 
     if (0 == direction) return;
 
+    // REVISAR
     if(!(m_platform && per->isTouchingPlatform(m_platform))&& m_jumpAnimation->state() == QAbstractAnimation::Stopped){
         if(m_platform){
             per->fall();
@@ -152,10 +156,11 @@ void Mundos::moverPersonaje()
         if(per->pos().x()==8100){
             return;
         }
-        per->moveBy(dx, 0);
+        //per->moveBy(dx, 0);  // Aqui se mueve a la derecha
         int diff = per->pos().x() - scroll->value();
 
-        if(diff > 850){
+        if(diff > 850 && per-> x()<= 3800 - 820 + per->wid()){
+
             scroll->setValue(dx + scroll->value());
             background->setPos(dx + background->pos().x(), background->y());
             Puntaje->setPos(dx + Puntaje->pos().x(), Puntaje->y());
@@ -171,7 +176,7 @@ void Mundos::moverPersonaje()
             return;
         }
 
-        per->moveBy(dx, 0);
+        //per->moveBy(dx, 0); // Aqui se mueve a la izquierda
         int diff = per->pos().x() - scroll->value();
 
         if(diff < 600){
@@ -416,11 +421,13 @@ void Mundos::iniciarEscenaUno()
 
 
         //Agrego bandera fin de primer nivel
-        flag=new Next();
-        flag->setPos(7500,400);
+        next=new Next();
+        next->setPos(3800,535-next->heigth());
+
+        //3800,535,2
         //flag->setPos(400,550);
-        addItem(flag);
-        connect(this->flag, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
+        addItem(next);
+        connect(this->next, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
 
 }
 
@@ -509,58 +516,12 @@ void Mundos::iniciarEscenaDos()
     }
 
 
-
-/*
-     //Agregamos los jabali´s enemigos
-      jabali1 = new JabaliEnemigo(300,700);
-      jabali1->setPos(300, nivelTierra-100);
-      addItem(jabali1);
-      connect(this->jabali1, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
-
-
-      jabali2 = new JabaliEnemigo(700,1000);
-      jabali2->setPos(700, nivelTierra-100);
-      addItem(jabali2);
-      connect(this->jabali2, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
-
-      jabali3 = new JabaliEnemigo(1650,1800);
-      jabali3->setPos(1650, nivelTierra-250);
-      addItem(jabali3);
-      connect(this->jabali3, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
-
-      jabali4 = new JabaliEnemigo(1550,1950);
-      jabali4->setPos(1550, nivelTierra-100);
-      addItem(jabali4);
-      connect(this->jabali4, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
-
-      jabali5 = new JabaliEnemigo(2900,3400);
-      jabali5->setPos(2900, nivelTierra-100);
-      addItem(jabali5);
-      connect(this->jabali5, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
-
-      jabali6 = new JabaliEnemigo(3700,4250);
-      jabali6->setPos(3700, nivelTierra-100);
-      addItem(jabali6);
-      connect(this->jabali6, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
-
-      jabali7 = new JabaliEnemigo(4600,4950);
-      jabali7->setPos(4600, nivelTierra-100);
-      addItem(jabali7);
-      connect(this->jabali7, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
-
-      jabali8 = new JabaliEnemigo(5110,5400);
-      jabali8->setPos(5110, nivelTierra-100);
-      addItem(jabali8);
-      connect(this->jabali8, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
-
-*/
-
       //Agregamos zanahoria de fin de segundo nivel
-      zanahoriaDorada = new Next2();
-      zanahoriaDorada->setPos(7480,390);
+      next2 = new Next2();
+      next2->setPos(7480,390);
       //zanahoriaDorada->setPos(400,550);
-      addItem(zanahoriaDorada);
-      connect(this->zanahoriaDorada, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
+      addItem(next2);
+      connect(this->next2, SIGNAL(estadoJuego(int)),this, SLOT(Estado(int)));
 
       timer = new QTimer(this);
       connect(timer,SIGNAL(timeout()),this,SLOT(moverPersonaje()));
@@ -741,7 +702,7 @@ void Mundos::Estado(int n)
 void Mundos::reiniciarEscenaUno()
 {
     delete per;
-    delete flag;
+    delete next;
     delete timer;
     delete mFallTimer;
     delete background;
@@ -787,7 +748,7 @@ void Mundos::reiniciarEscenaDos()
 {
     delete per;
     delete timer;
-    delete zanahoriaDorada;
+    delete next2;
     delete mFallTimer;
     delete background;
     delete ground;
@@ -829,7 +790,7 @@ void Mundos::Borrarmundo1()
     delete ground;
     delete danger;
     delete Puntaje;
-    delete flag;
+    delete next;
     delete LogoPuntaje;
     delete LogoVida;
     delete Tortuga1;

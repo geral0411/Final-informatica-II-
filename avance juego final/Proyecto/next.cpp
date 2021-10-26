@@ -62,3 +62,8 @@ int Next::type() const
 {
     return Type;
 }
+
+int Next::heigth()
+{
+    return sprite.height();
+}

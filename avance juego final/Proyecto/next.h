@@ -17,6 +17,7 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     int type() const;
+    int heigth();
 public slots:
     void nextSprite();
 signals:

@@ -28,7 +28,7 @@ void Tortuga::nextSprite()
     //Distancia en caada sprite
     posSprite += 108;
     //Condicion volver al primer sprite, si sobre pasa la dimension la imagen plana
-    if(posSprite >= 867)
+    if(posSprite >= 759)
     {
         posSprite = 0;
     }

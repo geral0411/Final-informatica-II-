@@ -9,9 +9,9 @@
 #include "gameover.h"
 #include "ui_gameover.h"
 
-GameOver::GameOver(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::GameOver)
+GameOver::GameOver(QWidget *parent)
+    :  QDialog(parent)
+    ,  ui(new Ui::GameOver)
 {
     ui->setupUi(this);
 }

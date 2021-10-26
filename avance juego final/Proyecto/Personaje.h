@@ -6,9 +6,16 @@
 #include <QPixmap>
 #include <QPainter>
 #include <QTransform>
+#include <QTimer>
+#include <QObject>
 
-class Personaje : public QGraphicsItem
+class Personaje : public QObject, public QGraphicsItem
 {
+Q_OBJECT
+public slots:
+
+    void friccion();
+
 public:
      Personaje(bool jugador,QGraphicsItem *parent = 0);
      ~Personaje();
@@ -30,6 +37,10 @@ public:
     void walk();
     void fall();
     bool isFalling();
+    int wid ();
+    void new_spike(float x, float v, float mg,int p);
+
+
 
 private:
     enum State {
@@ -49,6 +60,13 @@ private:
     QPixmap mStandingPixmap;
     QPixmap mJumpPixmap;
     QPixmap standShootPixmap;
+    QTimer *time;
+    float Xo = 0;
+    float Vo = 0;
+    float Mk = 0;//coeficiente de friccion
+    int cont = 0;
+    float T = 0.1;//tiempo de muestreo
+    int n = 0;
 
 };
 
